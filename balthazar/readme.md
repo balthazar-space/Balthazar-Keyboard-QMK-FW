@@ -6,7 +6,7 @@ A customizable 80% keyboard.
 
 * Keyboard Maintainer: [Turbosavski](https://github.com/Turbosavski)
 * Hardware Supported: BALTHAZAR KEYBOARD
-* Hardware Availability: 
+* Hardware Availability: PCB and BoM published on https://github.com/balthazar-space/balthazarKeyboard2
 
 Make example for this keyboard (after setting up your build environment):
 
