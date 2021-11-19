@@ -1,6 +1,6 @@
 # BALTHAZAR
 
-![balthazar](https://balthazar.space/wiki/Keyboard#/media/File:Key_solderedon.png)
+[balthazar](https://balthazar.space/wiki/Keyboard#/media/File:Key_solderedon.png)
 
 A customizable 80% keyboard.
 
