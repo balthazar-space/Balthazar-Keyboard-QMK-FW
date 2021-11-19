@@ -12,5 +12,5 @@ QMK firmware is a natural solution for ATmega 32u4 based keyboards. Copy the bal
 
 balthazar_default.hex is a compiled default keymap version. It is for caterina bootloader ATmega 32u4 chips taken from Chinese Sparkfun Pro Micro clones.
 
-At this point only the default keymap is tested: no touchpad, no oled display, etc. 
+At this point only the default keymap is tested: (no touchpad-trackball support no OLED display yet) also the security module is in testing phase. 
 
