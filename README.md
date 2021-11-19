@@ -1,16 +1,16 @@
-balthazar
+Balthazar
 
-Open-hardware laptop computer modules
+Open-hardware laptop computer modules.
 
 Modules as presented at https://balthazar.space/wiki/Balthazar and at https://github.com/balthazar-space with the main aim for team access
 
 # balthazarKeyboardQMK
 
-Balthazar open-hardware laptop - QMK firmware https://docs.qmk.fm/ for keyboard and touchpad module
+Balthazar open-hardware laptop - QMK firmware https://docs.qmk.fm/ for keyboard and touchpad module.
 
 QMK firmware is a natural solution for ATmega 32u4 based keyboards. Copy the balthazar folder above into keyboards folder of your qmk_firmware installation. 
 
 balthazar_default.hex is a compiled default keymap version. It is for caterina bootloader ATmega 32u4 chips taken from Chinese Sparkfun Pro Micro clones.
 
-At this point only the default keymap is tested: (no touchpad-trackball support no OLED display yet) also the security module is in testing phase. 
+At this point only the default keymap is tested and working. There is rather limited touchpad-trackball support and no OLED display support yet, also the security activation password module is in early testing phase. 
 
