@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef OLED_ENABLE
 
+#define PASSWORD_MAX_LEN 128
+
 /*
 static void print_status(void) {
      // Host Keyboard LED Status
@@ -26,6 +28,29 @@ static void print_status(void) {
     oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
 }
 */
+
+char entryBuffer[PASSWORD_MAX_LEN] = {};
+int entryBufferIndex = 0;
+
+// Print password (using * to conceal password)
+void printEntryBufferR(char replaceChar) {
+    for (int i = 0; i < sizeof entryBuffer; i++) {
+        if (entryBuffer[i] != '\0') {
+            if (replaceChar == '\0') {
+                oled_write_char(entryBuffer[i], false);
+            } else {
+                oled_write_char('*', false);
+            }
+        }
+    }
+}
+void printEntryBuffer(void) {
+    printEntryBufferR('\0');
+}
+
+void clearEntryBuffer(void) {
+    memset(entryBuffer, 0, sizeof entryBuffer);
+}
 
 // Show logo (in custom font)
 static void render_logo(void) {
@@ -65,7 +90,10 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
 void progress_state(void) {
     switch (current_state) {
+
     case STATE_SPLASH:
+        oled_clear();
+        // @TODO check if pw set!
         current_state = STATE_PASSWORD_SET;
         break;
 
@@ -77,14 +105,23 @@ void progress_state(void) {
             current_state = STATE_PASSWORD_INVALID;
         }
         break;
+
     case STATE_PASSWORD_INVALID:
         current_state = STATE_PASSWORD_ENTER;
         break;
+
     case STATE_PASSWORD_SET:
+        // @TODO save to EEPROM
+        oled_clear();
+        clearEntryBuffer();
         current_state = STATE_PASSWORD_SET_SUCCESS;
-    case STATE_PASSWORD_SET_SUCCESS:
-        current_state = STATE_BOOT_MENU;
         break;
+
+    case STATE_PASSWORD_SET_SUCCESS:
+        //current_state = STATE_BOOT_MENU;
+        current_state = STATE_PASSWORD_SET;
+        break;
+
     case STATE_BOOT_MENU:
         current_state = STATE_STARTING;
         break;
@@ -112,19 +149,22 @@ bool oled_task_user(void) {
 
     case STATE_PASSWORD_ENTER:
         render_logo();
-        oled_write_P(PSTR("Enter password: "), false);
+        oled_write_ln_P(PSTR("Enter password:"), false);
         // @TODO capture input, compare with EEPROM
         break;
 
     case STATE_PASSWORD_SET:
-        render_logo();
-        oled_write_P(PSTR("Set new password: "), false);
+        oled_write_ln_P(PSTR("No password found."), false);
+        oled_write_ln_P(PSTR("Set new password:"), false);
+        printEntryBufferR('*');
         // @TODO capture input, save to EEPROM
         break;
 
     case STATE_PASSWORD_SET_SUCCESS:
-        render_logo();
-        oled_write_P(PSTR("Password set successfully!"), false);
+        //render_logo();
+        oled_clear();
+        oled_write_ln_P(PSTR("Password set success!"), false);
+        printEntryBuffer();
 
         if (timer_elapsed(state_timer) > TRANSITION_TIME) {
             progress_state();
@@ -160,6 +200,37 @@ bool oled_task_user(void) {
     }
 
     return false;
+}
+
+const char code_to_name[60] = {
+    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+    'R', 'E', 'B', 'T', ' ', ' ', ' ', ' ', ' ', ' ',
+    ' ', ';', '\'', ' ', ',', '.', '/', ' ', ' ', ' '};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Capture input to buffer in certain states
+    if ((current_state == STATE_PASSWORD_ENTER
+         || current_state == STATE_PASSWORD_SET)
+        && record->event.pressed) {
+        // Backspace?
+        if (keycode == KC_BSPC && entryBufferIndex > 0) {
+            entryBuffer[entryBufferIndex] = '\0';
+            entryBufferIndex -= 1;
+        // Submit entry
+        } else if (keycode == KC_ENT || keycode == KC_T) {
+            progress_state();
+        // Save current character
+        } else if (keycode < 60) {
+            // @TODO broaden from lowercase chars and numbers
+            entryBuffer[entryBufferIndex] = code_to_name[keycode];
+            entryBufferIndex += 1;
+        }
+        return false;
+    }
+    return true;
 }
 
 #endif // end OLED_ENABLE
