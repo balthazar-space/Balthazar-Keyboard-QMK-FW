@@ -1,0 +1,15 @@
+{
+    "keyboard_name": "Balthazar keyboard version 3",
+    "maintainer": "NXT",
+    "manufacturer": "BALTHAZAR",
+    "url": "https://balthazar.space/",
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0xBAFE",
+        "device_version": "0.0.3"
+    },
+    "description": "QMK_77KEYS",
+    "processor": "atmega32u4",
+    "bootloader": "caterina",
+    "layout": "LAYOUT_balthazar3"
+}
