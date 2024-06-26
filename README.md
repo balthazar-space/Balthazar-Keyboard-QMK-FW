@@ -1,6 +1,8 @@
-Veronica Security Engine is a part of open-hardware laptop software and firmware computer modules.
+# Balthazar
 
-Modules as presented at https://balthazar.space/wiki/Balthazar and at https://github.com/balthazar-space with the main aim for team access
+Open-hardware laptop computer modules description and concept.
+
+These are electronic schematic modules as presented at https://balthazar.space/wiki/Balthazar with the main aim for team access. See the [main repository](https://github.com/balthazar-space/balthazar) for other designs.
 
 # balthazarKeyboardQMK
 
@@ -20,7 +22,26 @@ balthazar_default.hex is a compiled default keymap version.
 It is for caterina bootloader ATmega 32u4 chips taken from Chinese Sparkfun Pro Micro clones.
 
 At this point only the default keymap is fully tested and working. 
-There is rather limited touchpad-trackball support and no OLED display support yet, also the security activation password module is in an early testing "bazaar" phase.
+There is rather limited touchpad-trackball support and WIP OLED display support, also the security activation password module is in an early testing "bazaar" phase.
+
+**_beware:_** The password is saved plaintext in the microcontroller's EEPROM. It can be extracted with proper equipment and can easily be overwritten on the currently used ATmega32u4.
+
+## License
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+See the [LICENSE.md](./LICENSE.md) file for more information.
 
 ## Funding
 
