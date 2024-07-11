@@ -4,7 +4,7 @@ Open-hardware laptop computer modules description and concept.
 
 These are electronic schematic modules as presented at https://balthazar.space/wiki/Balthazar with the main aim for team access. See the [main repository](https://github.com/balthazar-space/balthazar) for other designs.
 
-# Balthazar--Keyboard-QMK-FW
+# Balthazar-Keyboard-QMK-FW
 
 Balthazar open-hardware laptop - QMK firmware https://docs.qmk.fm/ for keyboard and touchpad module.
 
