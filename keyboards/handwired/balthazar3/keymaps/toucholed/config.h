@@ -17,3 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 //#define OLED_FONT_H "glcdfont.c"
+
+// Invalid row/col, bootmagic is used just to clear EEPROM
+#define BOOTMAGIC_ROW 13
+#define BOOTMAGIC_COLUMN 13
+
+// EEPROM size; whether password is set (1 byte) + password hash (16 bytes)
+#define EECONFIG_KB_DATA_SIZE 17

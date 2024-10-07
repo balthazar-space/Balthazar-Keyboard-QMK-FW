@@ -36,7 +36,8 @@ MOUSEKEY_ENABLE = no        	# Mouse keys - we dont use buttons on mousepad, but
 #PS2_USE_USART = yes		# later we will use this one
 
 MIDI_ENABLE = no            # MIDI support - might be usefull - need to declare keymap layer
-BOOTMAGIC_ENABLE = no       # Virtual DIP switch configuration
+# This is used to clear EEPROM on every flash!
+BOOTMAGIC_ENABLE = yes      # Virtual DIP switch configuration
 EXTRAKEY_ENABLE = no        # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration

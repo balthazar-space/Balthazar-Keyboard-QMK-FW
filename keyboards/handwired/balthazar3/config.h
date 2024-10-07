@@ -247,3 +247,6 @@ trackpad without native buttons. A touch on trackpad changes the F6, F7 keys to 
 #endif  // end PS2_MOUSE_ENABLE
 
 #define OLED_FONT_H "keymaps/toucholed/glcdfont.c"
+
+// Data version (for clearing the EEPROM)
+#define EECONFIG_KB_DATA_VERSION 1
